@@ -2,7 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <Nullable>enable</Nullable>
+    
+    <ImplicitUsings>enable</ImplicitUsings>
+   
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
@@ -14,7 +16,12 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="6.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="6.0.10" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.25.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.10" />
   </ItemGroup>
+
+
 
   <ItemGroup>
     <None Remove="Entities\" />
@@ -23,9 +30,20 @@
     <None Remove="Data\" />
     <None Remove="Microsoft.EntityFrameworkCore.Design" />
     <None Remove="Pomelo.EntityFrameworkCore.MySql" />
+    <None Remove="Microsoft.AspNetCore.SpaServices.Extensions" />
+    <None Remove="DTOs\" />
+    <None Remove="Intrefaces\" />
+    <None Remove="Services\" />
+    <None Remove="System.IdentityModel.Tokens.Jwt" />
+    <None Remove="Microsoft.AspNetCore.Authentication.JwtBearer" />
+    <None Remove="Extensions\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Entities\" />
     <Folder Include="Data\" />
+    <Folder Include="DTOs\" />
+    <Folder Include="Intrefaces\" />
+    <Folder Include="Services\" />
+    <Folder Include="Extensions\" />
   </ItemGroup>
 </Project>

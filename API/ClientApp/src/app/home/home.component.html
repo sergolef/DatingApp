@@ -1,0 +1,26 @@
+<div class="container" >
+  
+    <div class="container mt-5" style="text-align: center;" *ngIf="!isRegisterToggled">
+      <div class="mt-5 pt-5">
+        <h2>For more register</h2>
+        <p>Some beautiful text will be here:)</p>
+        <button class="btn btn-success btn-lg mr-5" (click)="registerToggle()">Register</button>
+        <button class="btn btn-info btn-lg">Learn more</button>
+      </div>
+    
+    </div>
+    
+  
+
+  <div class="container mt-4" style="text-align: center;" *ngIf="isRegisterToggled">
+    <h3 class="pt-5">Register form</h3>
+    
+    <div class="row justify-content-center">
+      <div class="col-5">
+        <hr>
+        <app-register [users]="users" (cancelReg)="cancelRegistration($event)"></app-register>
+      </div>
+      
+    </div>
+  </div>
+</div>

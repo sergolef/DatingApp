@@ -1,0 +1,38 @@
+<form #registerForm="ngForm" (ngSubmit)="onSumbit(registerForm)">
+  <div class="form-group">
+    <label for="username">Username:</label>
+    <input 
+      type="text" 
+      class="form-control" 
+      name="username"
+      autocomplete="off"
+      ngModel
+      required
+      #fusername="ngModel">
+      <span class="form-text text-muted error" 
+        *ngIf="!fusername.valid && fusername.touched">Please input the username</span>
+  </div>
+  <div class="form-group">
+    <label for="lovlyUser">Who are you like?</label>
+    <select name="lovlyUser" id="" class="form-control">
+      <option *ngFor="let user of users;let i=index" value="user.userName" name="i">{{user.userName}}</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="username">Password:</label>
+    <input 
+      type="password" 
+      class="form-control" 
+      name="password"
+      ngModel
+      required
+      #fpassword="ngModel"
+      pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$">
+      <span class="form-text text-muted error" 
+        *ngIf="!fpassword.valid && fpassword.touched">Please input the password</span>
+  </div>
+  <div>
+    <button class="btn btn-success mr-3" type="submit" [disabled]="!registerForm.valid">Register</button>
+    <button class="btn btn-danger" type="button" (click)="cancelRegistration()">Cancel</button>
+  </div>
+</form>
