@@ -1,9 +1,11 @@
 import { JsonPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Route, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { User } from '../models/user.model';
 import { AccountService } from '../services/account.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-nav',
@@ -14,11 +16,14 @@ export class NavComponent implements OnInit {
 
   user:User;
   ddShow: boolean;
+  isCollapsed = false;
 
-  constructor(public accountService: AccountService) { }
+  constructor(public accountService: AccountService, private router:Router, private toastr:ToastrService) { }
 
   ngOnInit(): void {
-
+    this.accountService.curentUser$.subscribe(user => {
+      this.user = user;
+    })
   }
 
   ddToggle(){
@@ -35,9 +40,11 @@ export class NavComponent implements OnInit {
     this.accountService.login(ngForm.form.value).subscribe( {
       next: (res) => {
         console.log(res);
+        this.router.navigateByUrl('/members');
       },
       error: error => {
         console.log(error);
+        this.toastr.error(error.message);
       }
     });
   }

@@ -1,37 +1,38 @@
 
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <div class="container">
-        <a class="navbar-brand" href="#">DatingApp</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top bg-primary">
+      <div class="container-fluid">
+        <a class="navbar-brand" routerLinkActive="active" [routerLink]="['/']">DatingApp</a>
+        <button (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
   
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-          <ul class="navbar-nav mr-auto" *ngIf="accountService.curentUser$ | async">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Home <span class="sr-only"></span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Matches</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Lists</a>
-            </li>
-  
-            <li class="nav-item">
-              <a class="nav-link" href="#">Messages</a>
-            </li>
+        <div class="collapse navbar-collapse" id="navbarCollapse" [collapse]="isCollapsed" [isAnimated]="true">
+          <ul class="navbar-nav mr-auto" >
+            <ng-container *ngIf="accountService.curentUser$ | async">
+            
+              <li class="nav-item">
+                <a class="nav-link" routerLinkActive="active" [routerLink]="['/members']">Matches</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" routerLinkActive="active" [routerLink]="['/lists']">Lists</a>
+              </li>
+    
+              <li class="nav-item">
+                <a class="nav-link" routerLinkActive="active" [routerLink]="['/messages']">Messages</a>
+              </li>
+            </ng-container>
+            
           </ul>
           
   
-          <div class="dropdown {{ ddShow ? 'show':''}}" *ngIf="accountService.curentUser$ | async" id="loginedMenu">
-            <button (click)="ddToggle()" class="btn btn-secondary dropdown-toggle {{ ddShow ? 'show':''}}" type="button" data-toggle="dropdown" aria-expanded="false">
-              Welcome
+          <div class="dropdown" *ngIf="accountService.curentUser$ | async" id="loginedMenu" dropdown>
+            <button (click)="ddToggle()" dropdownToggle class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+              Welcome {{user.username | titlecase}}
             </button>
-            <div class="dropdown-menu {{ ddShow ? 'show':''}}" >
+            <div class="dropdown-menu" *dropdownMenu>
               <a class="dropdown-item" href="#">Profile settings</a>
               <a class="dropdown-item" href="#"></a>
-              <a class="dropdown-item" href="#" (click)="logout()">Logout</a>
+              <a class="dropdown-item" href="#">Logout</a>
             </div>
           </div>
           <div class="align-items-end">
@@ -50,7 +51,7 @@
                placeholder="Password" 
                aria-label="Password" 
                name="password">
-              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
+              <button class="btn btn-success my-2 my-sm-0" type="submit">Login</button>
             </form>
           </div>
           

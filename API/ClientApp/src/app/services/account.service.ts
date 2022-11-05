@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { ErrorHandler, Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { ReplaySubject } from 'rxjs';
 import { map, catchError } from "rxjs/operators";
 import { User } from '../models/user.model';
@@ -13,7 +14,7 @@ export class AccountService {
   curentUser$ = this.curentUserSource.asObservable();
 
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient, private router:Router) { }
 
   login(loginData){
     return this.http.post(this.BASE_URL+'/account/login', loginData).pipe(
@@ -44,8 +45,10 @@ export class AccountService {
   }
 
   logout(){
+    localStorage.clear();
     this.curentUserSource.next(null);
-    localStorage.removeItem("userData");
+    this.router.navigateByUrl('/');
+    
   }
 }
 
