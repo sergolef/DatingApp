@@ -37,6 +37,9 @@
     <None Remove="System.IdentityModel.Tokens.Jwt" />
     <None Remove="Microsoft.AspNetCore.Authentication.JwtBearer" />
     <None Remove="Extensions\" />
+    <None Remove="Middlewares\" />
+    <None Remove="Models\" />
+    <None Remove="Errors\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Entities\" />
@@ -45,5 +48,8 @@
     <Folder Include="Intrefaces\" />
     <Folder Include="Services\" />
     <Folder Include="Extensions\" />
+    <Folder Include="Middlewares\" />
+    <Folder Include="Models\" />
+    <Folder Include="Errors\" />
   </ItemGroup>
 </Project>

@@ -27,6 +27,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddCors();
 
 
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -36,6 +38,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseExceptionMiddlewareExtensions(app.Logger, app.Environment);
 
 
 
