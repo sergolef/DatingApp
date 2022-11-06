@@ -15,6 +15,9 @@ import { ListsComponent } from './members/lists/lists.component';
 import { MessagesComponent } from './members/messages/messages.component';
 import { SharedModule } from './modules/shared.module';
 import { ErrorHandlerInterceptor } from './interceptors/error-handler.interceptor';
+import { ErrorsComponent } from './errors/errors.component';
+import { NotFoundComponent } from './errors/not-found/not-found.component';
+import { ServerErrorComponent } from './errors/server-error/server-error.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +28,10 @@ import { ErrorHandlerInterceptor } from './interceptors/error-handler.intercepto
     MembersListComponent,
     MembersDetailsComponent,
     ListsComponent,
-    MessagesComponent
+    MessagesComponent,
+    ErrorsComponent,
+    NotFoundComponent,
+    ServerErrorComponent
   ],
   imports: [
     BrowserModule,
@@ -34,11 +40,11 @@ import { ErrorHandlerInterceptor } from './interceptors/error-handler.intercepto
     FormsModule,
     BrowserAnimationsModule,
     SharedModule,
-    
+
    // NgxFontAwesomeModule
 
   ],
-  providers: [HttpClientModule, 
+  providers: [HttpClientModule,
   {
     provide: HTTP_INTERCEPTORS,
     useClass: ErrorHandlerInterceptor,

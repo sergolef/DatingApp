@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { ErrorHandler, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { ReplaySubject } from 'rxjs';
+import { ReplaySubject, throwError } from 'rxjs';
 import { map, catchError } from "rxjs/operators";
 import { User } from '../models/user.model';
 

@@ -5,26 +5,29 @@
         <button (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-  
+
         <div class="collapse navbar-collapse" id="navbarCollapse" [collapse]="isCollapsed" [isAnimated]="true">
           <ul class="navbar-nav mr-auto" >
+            <li class="nav-item">
+              <a class="nav-link" routerLinkActive="active" [routerLink]="['/errors-t']">Errors</a>
+            </li>
             <ng-container *ngIf="accountService.curentUser$ | async">
-            
+
               <li class="nav-item">
                 <a class="nav-link" routerLinkActive="active" [routerLink]="['/members']">Matches</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" routerLinkActive="active" [routerLink]="['/lists']">Lists</a>
               </li>
-    
+
               <li class="nav-item">
                 <a class="nav-link" routerLinkActive="active" [routerLink]="['/messages']">Messages</a>
               </li>
             </ng-container>
-            
+
           </ul>
-          
-  
+
+
           <div class="dropdown" *ngIf="accountService.curentUser$ | async" id="loginedMenu" dropdown>
             <button (click)="ddToggle()" dropdownToggle class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
               Welcome {{user.username | titlecase}}
@@ -37,24 +40,24 @@
           </div>
           <div class="align-items-end">
             <form class="form-inline mt-2 mt-md-0" #loginForm="ngForm" (ngSubmit)="login(loginForm)" *ngIf="(accountService.curentUser$|async)===null">
-              <input 
-                ngModel 
-              class="form-control mr-sm-2" 
-              type="text" 
-              placeholder="Username" 
-              aria-label="Username" 
+              <input
+                ngModel
+              class="form-control mr-sm-2"
+              type="text"
+              placeholder="Username"
+              aria-label="Username"
               name="username">
-              <input 
+              <input
               ngModel
-               class="form-control mr-sm-2" 
-               type="text" 
-               placeholder="Password" 
-               aria-label="Password" 
+               class="form-control mr-sm-2"
+               type="text"
+               placeholder="Password"
+               aria-label="Password"
                name="password">
               <button class="btn btn-success my-2 my-sm-0" type="submit">Login</button>
             </form>
           </div>
-          
+
         </div>
       </div>
 
