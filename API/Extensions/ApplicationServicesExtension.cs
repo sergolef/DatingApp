@@ -1,5 +1,6 @@
 ﻿using System;
 using API.Data;
+using API.Helpers;
 using API.Intrefaces;
 using API.Services;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +13,10 @@ namespace API.Extensions
         {
             var connectionString = config.GetConnectionString("DefaultConnection");
             var serverVersion = new MySqlServerVersion(new Version(8, 0, 30));
+
+            //add repositories
+            services.AddScoped<IUserRepository, UserRepository>();
+
             services.AddDbContext<DataContext>(options =>
             {
                 options.UseMySql(connectionString, serverVersion);
@@ -22,7 +27,15 @@ namespace API.Extensions
                 configuration.RootPath = "ClientApp/dist";
             });
 
+            //add services
             services.AddScoped<ITokenService, TokenService>();
+
+            
+
+
+            //add mapers
+            services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
+
             return services;
         }
     }

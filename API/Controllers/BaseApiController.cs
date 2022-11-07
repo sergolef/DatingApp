@@ -9,7 +9,7 @@ namespace API.Controllers
     public class BaseApiController : ControllerBase
     {
         protected DataContext _cotext;
-        public BaseApiController(DataContext _context)
+        public BaseApiController(DataContext _context = null)
         {
             this._cotext = _context;
         }

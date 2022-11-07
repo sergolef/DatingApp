@@ -31,6 +31,24 @@ builder.Services.AddCors();
 
 var app = builder.Build();
 
+//seeding test data into database
+//SeedDatabase();
+
+//void SeedDatabase()
+//{
+//    using (var scope = app.Services.CreateScope())
+//        try
+//        {
+//            var scopedContext = scope.ServiceProvider.GetRequiredService<DataContext>();
+//            Seeder.Initialize(scopedContext);
+//        }
+//        catch
+//        {
+//            throw;
+//        }
+//}
+    
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
