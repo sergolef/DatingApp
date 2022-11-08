@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
+import { MembersService } from './services/members.service';
 
 @Component({
   selector: 'app-root',
@@ -10,11 +11,8 @@ export class AppComponent implements OnInit {
 
   title = 'Test';
   users: any;
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private memberService:MembersService) { }
   ngOnInit() {
-    this.httpClient.get('https://localhost:5001/api/users').subscribe({
-      next: resp => this.users = resp,
-      error: error => console.log(error)
-    });
+
   }
 }

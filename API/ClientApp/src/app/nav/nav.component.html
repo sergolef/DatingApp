@@ -33,9 +33,9 @@
               Welcome {{user.username | titlecase}}
             </button>
             <div class="dropdown-menu" *dropdownMenu>
-              <a class="dropdown-item" href="#">Profile settings</a>
+              <a class="dropdown-item" href="#" [routerLink]="['/member/edit']">Edit profile</a>
               <a class="dropdown-item" href="#"></a>
-              <a class="dropdown-item" href="#">Logout</a>
+              <a class="dropdown-item" href="#" (click)="logout()">Logout</a>
             </div>
           </div>
           <div class="align-items-end">

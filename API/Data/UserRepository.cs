@@ -31,6 +31,7 @@ namespace API.Data
         {
             return await context.Users
                 .ProjectTo<MemberDTO>(mapper.ConfigurationProvider)
+                .Take(10)
                 .ToListAsync();
         }
 
@@ -39,7 +40,7 @@ namespace API.Data
             return await context.Users.FindAsync(id);
         }
 
-        public async Task<AppUser> GetUserByName(string name)
+        public async Task<AppUser> GetUserByNameAsync(string name)
         {
             return await context.Users
                 .Include(p => p.Photos)
@@ -62,6 +63,8 @@ namespace API.Data
         {
             context.Entry(user).State = EntityState.Modified;
         }
+
+        
     }
 }
 

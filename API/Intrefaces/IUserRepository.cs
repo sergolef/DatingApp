@@ -14,11 +14,12 @@ namespace API.Intrefaces
 
         Task<AppUser> GetUserById(int id);
 
-        Task<AppUser> GetUserByName(string name);
-
         Task<IEnumerable<MemberDTO>> GetMembersAsync();
 
         Task<MemberDTO> GetMemberAsync(string name);
+        Task<AppUser> GetUserByNameAsync(string username);
+
+  
     }
 }
 

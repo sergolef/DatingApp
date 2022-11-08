@@ -21,7 +21,9 @@ export class NavComponent implements OnInit {
   constructor(public accountService: AccountService, private router:Router, private toastr:ToastrService) { }
 
   ngOnInit(): void {
+    this.setCurrentUser();
     this.accountService.curentUser$.subscribe(user => {
+      console.log('nav init',user);
       this.user = user;
     })
   }
@@ -32,24 +34,19 @@ export class NavComponent implements OnInit {
 
   setCurrentUser() {
     const user:User = JSON.parse(localStorage.getItem("userData"));
-    this.accountService.setCurrentUser(user); 
+    this.accountService.setCurrentUser(user);
   }
 
   login(ngForm:NgForm){
-    console.log(ngForm.form.value);
     this.accountService.login(ngForm.form.value).subscribe( {
       next: (res) => {
-        console.log(res);
         this.router.navigateByUrl('/members');
-      },
-      error: error => {
-        console.log(error);
-        this.toastr.error(error.message);
       }
     });
   }
 
   logout(){
+    console.log('click logout in nav');
     this.user = {} as User;
     this.accountService.logout();
   }

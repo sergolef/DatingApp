@@ -10,7 +10,7 @@ import { NavComponent } from './nav/nav.component';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { MembersListComponent } from './members/members-list/members-list.component';
-import { MembersDetailsComponent } from './members/members-details/members-details.component';
+import { MembersDetailsComponent } from './members/members-list/members-details/members-details.component'
 import { ListsComponent } from './members/lists/lists.component';
 import { MessagesComponent } from './members/messages/messages.component';
 import { SharedModule } from './modules/shared.module';
@@ -18,6 +18,10 @@ import { ErrorHandlerInterceptor } from './interceptors/error-handler.intercepto
 import { ErrorsComponent } from './errors/errors.component';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
+import { AuthInterceptorService } from './interceptors/auth.interceptor';
+import { MemberCardComponent } from './members/members-list/member-card/member-card.component';
+import { MemberEditComponent } from './members/member-edit/member-edit.component';
+import { LoadingInterceptor } from './interceptors/loading.interceptor';
 
 @NgModule({
   declarations: [
@@ -31,7 +35,9 @@ import { ServerErrorComponent } from './errors/server-error/server-error.compone
     MessagesComponent,
     ErrorsComponent,
     NotFoundComponent,
-    ServerErrorComponent
+    ServerErrorComponent,
+    MemberCardComponent,
+    MemberEditComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +55,18 @@ import { ServerErrorComponent } from './errors/server-error/server-error.compone
     provide: HTTP_INTERCEPTORS,
     useClass: ErrorHandlerInterceptor,
     multi:true
-  }],
+  },
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptorService,
+    multi: true
+  },
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: LoadingInterceptor,
+    multi: true
+  },
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

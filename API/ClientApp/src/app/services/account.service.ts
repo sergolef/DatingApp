@@ -10,7 +10,7 @@ import { User } from '../models/user.model';
 })
 export class AccountService {
   BASE_URL:string = 'https://localhost:5001/api';
-  private curentUserSource = new ReplaySubject<User>(1); 
+  private curentUserSource = new ReplaySubject<User>(1);
   curentUser$ = this.curentUserSource.asObservable();
 
 
@@ -27,6 +27,7 @@ export class AccountService {
       })
     )
   }
+
 
   register(userData){
     return this.http.post<User>(this.BASE_URL+'/account/register', userData).pipe(
@@ -45,10 +46,11 @@ export class AccountService {
   }
 
   logout(){
-    localStorage.clear();
+    console.log('logout in accounservice');
+    localStorage.removeItem('userData');
     this.curentUserSource.next(null);
-    this.router.navigateByUrl('/');
-    
+    //this.router.navigateByUrl('/');
+
   }
 }
 

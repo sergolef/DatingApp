@@ -11,9 +11,12 @@ namespace API.Services
     public class TokenService : ITokenService
     {
         private readonly SymmetricSecurityKey _key;
+        private readonly IConfiguration config;
+
         public TokenService(IConfiguration config)
         {
             _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["tokenKey"]));
+            this.config = config;
         }
 
         public string CreateToken(AppUser user)
@@ -24,11 +27,12 @@ namespace API.Services
            };
 
             var creds = new SigningCredentials(_key, SecurityAlgorithms.HmacSha512Signature);
+            var lifeTime = config["tokenLifetime"];
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.Now.AddHours(8),
+                Expires = DateTime.Now.AddHours(Convert.ToDouble(lifeTime)),
                 SigningCredentials = creds
             };
 
