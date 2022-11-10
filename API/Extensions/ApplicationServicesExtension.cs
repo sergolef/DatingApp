@@ -12,6 +12,9 @@ namespace API.Extensions
         public static IServiceCollection AddAplicationServices(this IServiceCollection services, IConfiguration config)
         {
             var connectionString = config.GetConnectionString("DefaultConnection");
+
+            services.Configure<CloudinaryConfig>(config.GetSection("CloudinarySettings"));
+
             var serverVersion = new MySqlServerVersion(new Version(8, 0, 30));
 
             //add repositories
@@ -29,8 +32,8 @@ namespace API.Extensions
 
             //add services
             services.AddScoped<ITokenService, TokenService>();
-
-            
+            services.AddScoped<IPhotoService, PhotoService>();
+            //services.AddScoped<IImageService, ImageService>();
 
 
             //add mapers

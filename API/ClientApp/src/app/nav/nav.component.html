@@ -27,8 +27,9 @@
 
           </ul>
 
-
+          <img [src]="user.photourl" alt="{{user.username}}" class="card minithumbsnail mr-2" *ngIf="accountService.curentUser$| async">
           <div class="dropdown" *ngIf="accountService.curentUser$ | async" id="loginedMenu" dropdown>
+
             <button (click)="ddToggle()" dropdownToggle class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
               Welcome {{user.username | titlecase}}
             </button>

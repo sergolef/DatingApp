@@ -6,10 +6,14 @@ import { ToastrModule } from 'ngx-toastr';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { GalleryModule } from  'ng-gallery';
 import { NgxSpinnerModule } from "ngx-spinner";
+import { FileUploadModule } from 'ng2-file-upload';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+  ],
   imports: [
+    ReactiveFormsModule,
     CommonModule,
     BsDropdownModule.forRoot(),
     ToastrModule.forRoot({
@@ -18,7 +22,8 @@ import { NgxSpinnerModule } from "ngx-spinner";
     CollapseModule.forRoot(),
     TabsModule.forRoot(),
     GalleryModule.withConfig({}),
-    NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' })
+    NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' }),
+    FileUploadModule
   ],
   exports: [
     BsDropdownModule,
@@ -27,6 +32,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
     TabsModule,
     GalleryModule,
     NgxSpinnerModule,
+    FileUploadModule
   ]
 })
 export class SharedModule { }

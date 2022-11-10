@@ -63,8 +63,6 @@ namespace API.Data
         {
             context.Entry(user).State = EntityState.Modified;
         }
-
-        
     }
 }
 

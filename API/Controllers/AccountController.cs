@@ -13,9 +13,12 @@ namespace API.Controllers
     public class AccountController : BaseApiController
     {
         private readonly ITokenService _tokenService;
-        public AccountController(DataContext _context, ITokenService tokenService) : base(_context)
+        private readonly IUserRepository userRepository;
+
+        public AccountController(DataContext _context, ITokenService tokenService, IUserRepository userRepository) : base(_context)
         {
             _tokenService = tokenService;
+            this.userRepository = userRepository;
         }
 
         [HttpPost("register")]
@@ -50,7 +53,8 @@ namespace API.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<UserDTO>> Login(LoginDTO loginDTO)
         {
-            var user = await _cotext.Users.FirstOrDefaultAsync(x => x.UserName == loginDTO.Username);
+
+            var user = await userRepository.GetUserByNameAsync(loginDTO.Username);
 
             if (user == null)
             {
@@ -69,7 +73,8 @@ namespace API.Controllers
             return new UserDTO
             {
                 Username = user.UserName,
-                Token = _tokenService.CreateToken(user)
+                Token = _tokenService.CreateToken(user),
+                Photourl = user.Photos.FirstOrDefault(p => p.IsMain)?.Url
             };
         }
     }

@@ -1,15 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
-import { config, map, Observable, of } from 'rxjs';
+import { config, map, Observable, of, take } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Member } from '../models/member.model';
+import { AccountService } from './account.service';
+import { UsersService } from './users.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MembersService implements OnInit{
   BaseUrl:string = environment.baseApiUrl;
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient, private accountServise:AccountService) { }
   members: Member[] = [];
 
 
@@ -37,8 +39,16 @@ export class MembersService implements OnInit{
     return this.http.put(this.BaseUrl+'/users', member).pipe(
       map(() => {
         const index = this.members.indexOf(member);
-        this.members[index] = {...member};
+        this.members[index] = member;
       })
     );
+  }
+
+  updateMemberImage(id:number){
+    return this.http.put(this.BaseUrl+'/users/set-main-photo/'+id, {});
+  }
+
+  deleteMemberImage(id:number){
+    return this.http.delete(this.BaseUrl+'/users/delete-photo/'+id);
   }
 }
