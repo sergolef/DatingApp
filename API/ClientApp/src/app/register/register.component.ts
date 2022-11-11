@@ -26,10 +26,7 @@ export class RegisterComponent implements OnInit {
     this.accountService.register(formData.value).subscribe({
       next: res => {
         console.log(res);
-      },
-      error: error => {
-        console.log(error);
-        this.toastr.error(error.message);
+        formData.reset();
       }
     });
   }
@@ -37,6 +34,6 @@ export class RegisterComponent implements OnInit {
   cancelRegistration(){
     this.cancelReg.emit(false);
   }
- 
+
 
 }

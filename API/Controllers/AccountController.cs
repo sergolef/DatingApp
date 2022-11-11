@@ -5,6 +5,7 @@ using API.Data;
 using API.DTOs;
 using API.Entities;
 using API.Intrefaces;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,11 +15,13 @@ namespace API.Controllers
     {
         private readonly ITokenService _tokenService;
         private readonly IUserRepository userRepository;
+        private readonly IMapper _mapper;
 
-        public AccountController(DataContext _context, ITokenService tokenService, IUserRepository userRepository) : base(_context)
+        public AccountController(DataContext _context, ITokenService tokenService, IUserRepository userRepository, IMapper mapper) : base(_context)
         {
             _tokenService = tokenService;
             this.userRepository = userRepository;
+            _mapper = mapper;
         }
 
         [HttpPost("register")]
@@ -30,19 +33,21 @@ namespace API.Controllers
             }
 
             using var hmac = new HMACSHA512();
-            var user = new AppUser
-            {
-                UserName = registerDTO.Username.ToLower(),
-                UserPassword = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDTO.Password)),
-                UserSalt = hmac.Key
-            };
 
+            var user = _mapper.Map<AppUser>(registerDTO);
+
+
+            user.UserName = registerDTO.Username.ToLower();
+            user.UserPassword = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDTO.Password));
+            user.UserSalt = hmac.Key;
+            
             _cotext.Users.Add(user);
             await _cotext.SaveChangesAsync();
 
             return new UserDTO{
                 Username = registerDTO.Username,
-                Token =_tokenService.CreateToken(user)
+                Token =_tokenService.CreateToken(user),
+                KnownAs = registerDTO.KnownAs,
             };
         }
 

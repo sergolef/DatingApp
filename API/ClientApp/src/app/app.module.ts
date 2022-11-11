@@ -23,6 +23,7 @@ import { MemberCardComponent } from './members/members-list/member-card/member-c
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { LoadingInterceptor } from './interceptors/loading.interceptor';
 import { MemberFotoSettingsComponent } from './members/member-edit/member-foto-settings/member-foto-settings.component';
+import { DatepikerComponent } from './datepiker/datepiker.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { MemberFotoSettingsComponent } from './members/member-edit/member-foto-s
     ServerErrorComponent,
     MemberCardComponent,
     MemberEditComponent,
-    MemberFotoSettingsComponent
+    MemberFotoSettingsComponent,
+    DatepikerComponent
   ],
   imports: [
     BrowserModule,

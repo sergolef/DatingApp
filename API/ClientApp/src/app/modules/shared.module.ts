@@ -8,6 +8,7 @@ import { GalleryModule } from  'ng-gallery';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { FileUploadModule } from 'ng2-file-upload';
 import { ReactiveFormsModule } from '@angular/forms';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     TabsModule.forRoot(),
     GalleryModule.withConfig({}),
     NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' }),
-    FileUploadModule
+    FileUploadModule,
+    BsDatepickerModule.forRoot(),
   ],
   exports: [
     BsDropdownModule,
@@ -32,7 +34,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     TabsModule,
     GalleryModule,
     NgxSpinnerModule,
-    FileUploadModule
+    FileUploadModule,
+    BsDatepickerModule
   ]
 })
 export class SharedModule { }

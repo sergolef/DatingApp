@@ -1,35 +1,128 @@
 <form #registerForm="ngForm" (ngSubmit)="onSumbit(registerForm)">
   <div class="form-group">
+    <div class="form-check form-check-inline">
+      <input
+        ngModel
+        #gender="ngModel"
+        class="form-check-input"
+        type="radio"
+        name="gender"
+        id="exampleRadios1"
+        value="male" checked>
+      <label class="form-check-label" for="exampleRadios1">
+        Male
+      </label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input ngModel
+        #gender="ngModel"
+        class="form-check-input"
+        type="radio"
+        name="gender"
+        id="exampleRadios2"
+        value="female">
+      <label class="form-check-label" for="exampleRadios2">
+        Female
+      </label>
+    </div>
+
+  </div>
+
+
+  <div class="form-group">
+    <label for="gender">Date of birth:</label>
+    <input
+      bsDatepicker
+      [bsConfig]="{ isAnimated: true, dateInputFormat: 'DD MMMM YYYY', containerClass: 'theme-blue'  }"
+      type="text"
+      class="form-control"
+      name="dateOfBirth"
+      autocomplete="off"
+      ngModel
+      required
+      #dayofBirth="ngModel">
+      <span class="form-text text-muted error"
+        *ngIf="!dayofBirth.valid && dayofBirth.touched">Please input valid date</span>
+  </div>
+  <div class="form-group">
     <label for="username">Username:</label>
-    <input 
-      type="text" 
-      class="form-control" 
+    <input
+      type="text"
+      class="form-control"
       name="username"
       autocomplete="off"
       ngModel
       required
       #fusername="ngModel">
-      <span class="form-text text-muted error" 
+      <span class="form-text text-muted error"
         *ngIf="!fusername.valid && fusername.touched">Please input the username</span>
   </div>
-  <div class="form-group">
-    <label for="lovlyUser">Who are you like?</label>
-    <select name="lovlyUser" id="" class="form-control">
-      <option *ngFor="let user of users;let i=index" value="user.userName" name="i">{{user.userName}}</option>
-    </select>
-  </div>
+
   <div class="form-group">
     <label for="username">Password:</label>
-    <input 
-      type="password" 
-      class="form-control" 
+    <input
+      type="password"
+      class="form-control"
       name="password"
       ngModel
       required
       #fpassword="ngModel"
       pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$">
-      <span class="form-text text-muted error" 
+      <span class="form-text text-muted error"
         *ngIf="!fpassword.valid && fpassword.touched">Please input the password</span>
+  </div>
+  <div class="form-group">
+    <label for="username">ConfirmPassword:</label>
+    <input
+      type="password"
+      class="form-control"
+      name="confirmPassword"
+      ngModel
+      required
+      #fpassword="ngModel"
+      pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$">
+      <span class="form-text text-muted error"
+        *ngIf="!fpassword.valid && fpassword.touched">Please input the password</span>
+  </div>
+
+  <div class="form-group">
+    <label for="username">City:</label>
+    <input
+      type="text"
+      class="form-control"
+      name="city"
+      autocomplete="off"
+      ngModel
+      required
+      #city="ngModel">
+      <span class="form-text text-muted error"
+        *ngIf="!city.valid && city.touched">Please input city</span>
+  </div>
+  <div class="form-group">
+    <label for="username">Country:</label>
+    <input
+      type="text"
+      class="form-control"
+      name="country"
+      autocomplete="off"
+      ngModel
+      required
+      #country="ngModel">
+      <span class="form-text text-muted error"
+        *ngIf="!country.valid && country.touched">Please input valid country</span>
+  </div>
+  <div class="form-group">
+    <label for="username">Known As:</label>
+    <input
+      type="text"
+      class="form-control"
+      name="knownAs"
+      autocomplete="off"
+      ngModel
+      required
+      #knownAs="ngModel">
+      <span class="form-text text-muted error"
+        *ngIf="!knownAs.valid && knownAs.touched">Please input valid date</span>
   </div>
   <div>
     <button class="btn btn-success mr-3" type="submit" [disabled]="!registerForm.valid">Register</button>
