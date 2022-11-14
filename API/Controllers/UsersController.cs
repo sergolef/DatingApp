@@ -7,6 +7,7 @@ using API.Data;
 using API.DTOs;
 using API.Entities;
 using API.Extensions;
+using API.Helpers;
 using API.Intrefaces;
 using API.Services;
 using AutoMapper;
@@ -37,13 +38,22 @@ namespace API.Controllers
         // GET: /<controller>/
         [HttpGet]
         [AllowAnonymous]
-        public async Task<ActionResult<IEnumerable<MemberDTO>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<MemberDTO>>> GetUsers([FromQuery]PagedParams pagedParams)
         {
-            var users = await this.userRepository.GetUsersAsync();
+            var username = User.GetUsername();
 
-            var userToReturn = Mapper.Map<IEnumerable<MemberDTO>>(users);
+            var user = await this.userRepository.GetUserByNameAsync(username);
+            var defGender = user.Gender == "male" ? "female" : "male";
 
-            return Ok(await this.userRepository.GetMembersAsync());
+
+            pagedParams.Gender = (pagedParams.Gender != null) ? pagedParams.Gender : defGender;
+            pagedParams.Username = username;
+
+            var users = await this.userRepository.GetMembersAsync(pagedParams);
+            Response.AddPaginationHeader(users.CurrentPage, users.PageSize, users.TotalCount, users.TotalPages);
+
+
+            return Ok(users);
         }
 
         [HttpGet("{username}", Name = "GetUser")]

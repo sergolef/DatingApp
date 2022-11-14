@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-4">
-    <div class="card mb-3">
+    <div class="card mb-3" *ngIf="member">
       <h3 class="card-header">{{member.knownAs || 'User'}}</h3>
 
       <div class="d-block user-select-none" width="100%" height="200" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
@@ -13,11 +13,11 @@
 
       <div class="card-body">
         <b class="card-test">Last action:</b>
-        <p  class="card-text">{{member.lastActive}}</p>
+        <p  class="card-text">{{member.lastActive | date: 'dd-MM-yyyy HH:mm:ss'}}</p>
       </div>
       <div class="card-body">
         <b class="card-test">Member since:</b>
-        <p  class="card-text">{{member.registeredAt}}</p>
+        <p  class="card-text">{{member.registeredAt | date: 'dd-MM-yyyy'}}</p>
       </div>
       <div class="card-footer text-muted">
         {{member.age}} years old
@@ -32,7 +32,7 @@
       </div>
     </div>
   </div>
-  <div class="col-8">
+  <div class="col-8" *ngIf="member">
     <tabset>
       <tab heading="About {{member.knownAs}}" id="tab1">
         <div class="row">

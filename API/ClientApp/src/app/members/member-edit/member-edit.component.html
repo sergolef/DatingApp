@@ -37,7 +37,7 @@
       </div>
     </div>
   </div>
-  <div class="col-8">
+  <div class="col-8" *ngIf="member">
     <form #editForm="ngForm" id="editForm" (ngSubmit)="onFormSubmit()">
     <div class="alert alert-info" *ngIf="editForm.form.dirty">
       <p><strong>Info:</strong>You make changes. Do not forget to save changes.</p>

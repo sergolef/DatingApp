@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
   constructor(private usersService:UsersService) { }
 
   ngOnInit(): void {
-    this.getUsers();
+
   }
 
   registerToggle(){
@@ -28,15 +28,7 @@ export class HomeComponent implements OnInit {
     this.isRegisterToggled = event;
   }
 
-  getUsers(){
-    this.usersService.getUsers().subscribe({
-      next: res => {
-        this.users = res;
-      },
-      error: err => {
-        console.log(err);
-      }
-    });
-  }
+
+
 
 }

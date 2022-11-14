@@ -48,6 +48,8 @@ namespace API.Controllers
                 Username = registerDTO.Username,
                 Token =_tokenService.CreateToken(user),
                 KnownAs = registerDTO.KnownAs,
+          
+                Gender = registerDTO.Gender
             };
         }
 
@@ -79,7 +81,9 @@ namespace API.Controllers
             {
                 Username = user.UserName,
                 Token = _tokenService.CreateToken(user),
-                Photourl = user.Photos.FirstOrDefault(p => p.IsMain)?.Url
+                Photourl = user.Photos.FirstOrDefault(p => p.IsMain)?.Url,
+                KnownAs = user.KnownAs,
+                Gender = user.Gender
             };
         }
     }

@@ -33,7 +33,7 @@ namespace API.Extensions
             //add services
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IPhotoService, PhotoService>();
-            //services.AddScoped<IImageService, ImageService>();
+            services.AddScoped<LogUserAcivity>();
 
 
             //add mapers

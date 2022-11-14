@@ -31,7 +31,7 @@
           <div class="dropdown" *ngIf="accountService.curentUser$ | async" id="loginedMenu" dropdown>
 
             <button (click)="ddToggle()" dropdownToggle class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-              Welcome {{user.username | titlecase}}
+              Welcome {{user.knownAs | titlecase}}
             </button>
             <div class="dropdown-menu" *dropdownMenu>
               <a class="dropdown-item" href="#" [routerLink]="['/member/edit']">Edit profile</a>
