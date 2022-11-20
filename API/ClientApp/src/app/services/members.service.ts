@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 import { config, map, Observable, of, take } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { LikeParams } from '../models/likesparams.model';
 import { Member } from '../models/member.model';
 import { PaginationResult } from '../models/paginationresult.model';
 import { UserParams } from '../models/userparams.model';
@@ -81,5 +82,18 @@ export class MembersService implements OnInit{
 
   deleteMemberImage(id:number){
     return this.http.delete(this.BaseUrl+'/users/delete-photo/'+id);
+  }
+
+  getLikes(likeParams: LikeParams){
+    let paginationParams = this.getPaginationParams(likeParams.currentPage, likeParams.pageSize);
+
+    paginationParams = paginationParams.append('predicate', likeParams.predicate);
+
+    return this.getPaginatedResults<Member[]>(this.BaseUrl + '/likes', paginationParams);
+  }
+
+  addLike(username:string){
+    console.log('add member like');
+    return this.http.post(this.BaseUrl+'/likes/'+username, {});
   }
 }

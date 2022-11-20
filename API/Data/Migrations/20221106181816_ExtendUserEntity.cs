@@ -74,7 +74,7 @@ namespace API.Data.Migrations
                 defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
 
             migrationBuilder.AddColumn<string>(
-                name: "LookingfFor",
+                name: "LookingFor",
                 table: "Users",
                 type: "longtext",
                 nullable: true)
@@ -160,7 +160,7 @@ namespace API.Data.Migrations
                 table: "Users");
 
             migrationBuilder.DropColumn(
-                name: "LookingfFor",
+                name: "LookingFor",
                 table: "Users");
 
             migrationBuilder.DropColumn(

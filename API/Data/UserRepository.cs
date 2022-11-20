@@ -30,7 +30,7 @@ namespace API.Data
                 .SingleOrDefaultAsync();
         }
 
-        public async Task<PagedList<MemberDTO>> GetMembersAsync(PagedParams pagedParams)
+        public async Task<PagedList<MemberDTO>> GetMembersAsync(UserParams pagedParams)
         {
             
 
@@ -47,8 +47,9 @@ namespace API.Data
                 "created" => query.OrderByDescending(p => p.RegisteredAt),
                 "city" => query.OrderByDescending(p => p.City),
                 "country" => query.OrderByDescending(p => p.Country),
-                "cityasc" => query.OrderBy(p => p.City),
-                        _ => query.OrderByDescending(p => p.LastActive),
+                
+                "lastactive" => query.OrderByDescending(p => p.LastActive),
+                _ => query.OrderByDescending(p => p.LastActive),
                         
             };
             

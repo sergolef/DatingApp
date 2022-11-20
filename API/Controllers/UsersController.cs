@@ -38,7 +38,7 @@ namespace API.Controllers
         // GET: /<controller>/
         [HttpGet]
         [AllowAnonymous]
-        public async Task<ActionResult<IEnumerable<MemberDTO>>> GetUsers([FromQuery]PagedParams pagedParams)
+        public async Task<ActionResult<IEnumerable<MemberDTO>>> GetUsers([FromQuery]UserParams pagedParams)
         {
             var username = User.GetUsername();
 
