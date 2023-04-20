@@ -29,7 +29,7 @@
         </div>
         <div class="card-footer">
         <div class="btn-group d-flex">
-          <button class="btn btn-success"  type="submit" form="editForm" [disabled]="!editForm.form.dirty">
+          <button class="btn btn-success"  type="submit" form="editForm" [disabled]="!editForm?.form.dirty">
             Save changes
           </button>
           <button  class="btn btn-warning" type="reset" form="editForm">Reset</button>
@@ -39,7 +39,7 @@
   </div>
   <div class="col-8" *ngIf="member">
     <form #editForm="ngForm" id="editForm" (ngSubmit)="onFormSubmit()">
-    <div class="alert alert-info" *ngIf="editForm.form.dirty">
+    <div class="alert alert-info" *ngIf="editForm?.form.dirty">
       <p><strong>Info:</strong>You make changes. Do not forget to save changes.</p>
     </div>
     <tabset>

@@ -28,12 +28,14 @@ export class MemberEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     this.getMember();
   }
 
   getMember() {
     this.membersService.getMember(this.user.username).subscribe( member => {
       this.member = member;
+      console.log('ggg', this.member);
     })
   }
 

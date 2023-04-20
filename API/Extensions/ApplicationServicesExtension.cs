@@ -20,6 +20,7 @@ namespace API.Extensions
             //add repositories
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ILikeRepository, LikeRepository>();
+            services.AddScoped<IMessageRepository, MessageRepository>();
 
             services.AddDbContext<DataContext>(options =>
             {

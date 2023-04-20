@@ -1,1 +1,51 @@
-<p>messages works!</p>
+<div class="container">
+  <div class="row mb-4">
+    <div class="btn-group">
+      <button (click)="getMessages()" class="btn btn-success" [(ngModel)]="messageParams.container"
+      btnRadio="Unread" value="" tabindex="0" role="button" name="container">
+      <i class="fa fa-envelope"></i>
+      Unread</button>
+
+      <button (click)="getMessages()" class="btn btn-success" [(ngModel)]="messageParams.container"
+          btnRadio="Inbox" value="Inbox" tabindex="0" role="button" name="container">
+          <i class="fa fa-envelope-open"></i>
+          Inbox</button>
+
+      <button (click)="getMessages()" class="btn btn-success" [(ngModel)]="messageParams.container"
+          btnRadio="Outbox" value="Outbox" tabindex="0" role="button" name="container">
+          <i class="fa fa-paper-plane"></i>
+          Outbox</button>
+    </div>
+  </div>
+  <div class="row mb-2">
+    <table>
+      <thead>
+        <th>Message</th>
+        <th>From / To</th>
+        <th>Sent / Recived</th>
+        <th></th>
+      </thead>
+      <tbody *ngFor="let m of messages">
+        <tr>
+          <td>{{m.content}}</td>
+          <td>
+            <div *ngIf="messageParams.container === 'Outbox'">
+              <img class="img rounded-img" [src]="m.senderPhotoUrl ? m.senderPhotoUrl : './assets/def-user.png'" alt="">
+              <strong>{{m.recipientName | titlecase}}</strong>
+            </div>
+            <div *ngIf="messageParams.container !== 'Outbox'">
+              <img class="img rounded-img" [src]="m.recipientPhotoUrl ? m.recipientPhotoUrl : './assets/def-user.png'" alt="">
+              <strong>{{m.senderName | titlecase}}</strong>
+            </div>
+          </td>
+
+          <td>{{m.sentDate }}</td>
+          <td>
+            <button class="btn btn-danger">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

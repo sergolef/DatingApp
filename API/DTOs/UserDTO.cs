@@ -8,6 +8,11 @@ namespace API.DTOs
         public string Photourl { get; set; }
         public string KnownAs { get; set; }
         public string Gender { get; set; }
+
+        internal static object GetUsername()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 

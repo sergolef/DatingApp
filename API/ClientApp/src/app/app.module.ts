@@ -24,6 +24,7 @@ import { MemberEditComponent } from './members/member-edit/member-edit.component
 import { LoadingInterceptor } from './interceptors/loading.interceptor';
 import { MemberFotoSettingsComponent } from './members/member-edit/member-foto-settings/member-foto-settings.component';
 import { DatepikerComponent } from './datepiker/datepiker.component';
+import { MessagesTabComponent } from './members/member-edit/messages-tab/messages-tab.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { DatepikerComponent } from './datepiker/datepiker.component';
     MemberCardComponent,
     MemberEditComponent,
     MemberFotoSettingsComponent,
-    DatepikerComponent
+    DatepikerComponent,
+    MessagesTabComponent
   ],
   imports: [
     BrowserModule,

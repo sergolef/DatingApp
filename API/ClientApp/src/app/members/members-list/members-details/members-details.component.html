@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-4">
-    <div class="card mb-3" *ngIf="member">
+    <div class="card mb-3">
       <h3 class="card-header">{{member.knownAs || 'User'}}</h3>
 
       <div class="d-block user-select-none" width="100%" height="200" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
@@ -27,14 +27,14 @@
           <button class="btn btn-success">
             Like
           </button>
-          <button class="btn btn-warning">Message</button>
+          <button (click)="toTab(3)" class="btn btn-warning">Message</button>
         </div>
       </div>
     </div>
   </div>
   <div class="col-8" *ngIf="member">
-    <tabset>
-      <tab heading="About {{member.knownAs}}" id="tab1">
+    <tabset #memberTabs>
+      <tab heading="About {{member.knownAs}}" id="tab1" (selectTab)="onSelectTab($event)">
         <div class="row">
           <h2>Description:</h2>
           <p>{{member.introduction}}</p>
@@ -44,21 +44,21 @@
           <p>{{member.lookingFor}}</p>
         </div>
       </tab>
-      <tab heading="Interests">
+      <tab heading="Interests" (selectTab)="onSelectTab($event)">
         <div class="row">
           <h2>Interests</h2>
           <p>{{member.interests}}</p>
         </div>
       </tab>
-      <tab heading="Photos">
+      <tab heading="Photos" (selectTab)="onSelectTab($event)">
         <gallery [items]="images"></gallery>
         <hr>
         <div class="card col-4 m-2" *ngFor="let p of member.photos">
           <img [src]="p.url" alt="">
         </div>
       </tab>
-      <tab heading="Messages">
-        Messages will be here
+      <tab heading="Messages" (selectTab)="onSelectTab($event)">
+        <app-messages-tab  [messages]="messages" [username]="member.userName"></app-messages-tab>
       </tab>
     </tabset>
   </div>
