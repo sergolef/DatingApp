@@ -1,12 +1,6 @@
-﻿using System.Text;
-using API.Data;
+﻿using API.Data;
 using API.Extensions;
-using API.Intrefaces;
-using API.Services;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,10 +26,10 @@ builder.Services.AddCors();
 var app = builder.Build();
 
 //seeding test data into database
-//SeedDatabase();
+// SeedDatabase();
 
-//void SeedDatabase()
-//{
+// void SeedDatabase()
+// {
 //    using (var scope = app.Services.CreateScope())
 //        try
 //        {
@@ -46,14 +40,25 @@ var app = builder.Build();
 //        {
 //            throw;
 //        }
-//}
-    
+// }
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.UseCors(
+    policy => policy.AllowAnyHeader()
+        .AllowAnyMethod()
+        .WithOrigins("https://localhost:4200")
+        .WithOrigins("https://localhost:5001"));
+}else{
+    app.UseCors(
+    policy => policy.AllowAnyHeader()
+        .AllowAnyMethod()
+        .WithOrigins("https://localhost:4200")
+        .WithOrigins("https://localhost:5001"));
 }
 
 app.UseExceptionMiddlewareExtensions(app.Logger, app.Environment);
@@ -62,16 +67,17 @@ app.UseExceptionMiddlewareExtensions(app.Logger, app.Environment);
 
 app.UseHttpsRedirection();
 
-app.UseCors(
-    policy => policy.AllowAnyHeader()
-    .AllowAnyMethod()
-    .WithOrigins("https://localhost:4200")
-    .WithOrigins("https://localhost:5001"));
+// app.UseCors(
+//     policy => policy.AllowAnyHeader()
+//     .AllowAnyMethod()
+//     .WithOrigins("https://localhost:4200")
+//     .WithOrigins("https://localhost:5001"));
 
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapFallbackToController("Index", "Fallback");
 app.UseStaticFiles();
 //if (!app.Environment.IsDevelopment())
 //{
